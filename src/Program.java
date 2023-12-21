@@ -2,6 +2,7 @@ package src;
 
 import src.entities.Contract;
 import src.services.ContractService;
+import src.services.PaypalService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,7 +28,7 @@ public class Program {
             int installments = sc.nextInt();
 
             Contract contract = new Contract(number, date, valor);
-            ContractService contractService = new ContractService();
+            ContractService contractService = new ContractService(new PaypalService());
             contractService.processContract(contract, installments);
 
             System.out.println("Parcelas:");

@@ -4,10 +4,15 @@ import src.entities.Contract;
 import src.entities.Installment;
 import java.util.Calendar;
 
-public class ContractService{
-    public void processContract(Contract contract, Integer months){
+public class ContractService {
 
-        OnlinePaymentService service = new PaypalService();
+    private OnlinePaymentService service;
+
+    public ContractService(OnlinePaymentService service){
+        this.service = service;
+    }
+
+    public void processContract(Contract contract, Integer months){
 
         double installments = (double) contract.getTotalValue() / months;
 
