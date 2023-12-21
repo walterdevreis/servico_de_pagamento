@@ -1,23 +1,26 @@
 package src.entities;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Contract {
+
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private Integer number;
     private Date date;
     private Double totalValue;
 
-    List<Installment> installments;
+    List<Installment> installments = new ArrayList<>();
 
     public Contract(){
     }
 
-    public Contract(Integer number, Date date, Double totalValue, List<Installment> installments) {
+    public Contract(Integer number, Date date, Double totalValue) {
         this.number = number;
         this.date = date;
         this.totalValue = totalValue;
-        this.installments = installments;
     }
 
     public Integer getNumber() {
@@ -46,5 +49,18 @@ public class Contract {
 
     public List<Installment> getInstallments() {
         return installments;
+    }
+
+    public void addInstallments(Installment installment){
+        installments.add(installment);
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for (Installment list : installments) {
+            sb.append(System.out.printf("%s - %.2f%n", sdf.format(list.getDueDate()), list.getAmount()));
+        }
+        return sb.toString();
     }
 }
