@@ -2,15 +2,10 @@ package src.services;
 
 import src.entities.Contract;
 import src.entities.Installment;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class ContractService{
     public void processContract(Contract contract, Integer months){
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         OnlinePaymentService service = new PaypalService();
 

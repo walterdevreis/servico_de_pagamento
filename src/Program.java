@@ -1,11 +1,8 @@
 package src;
 
 import src.entities.Contract;
-import src.entities.Installment;
 import src.services.ContractService;
-import src.services.OnlinePaymentService;
-import src.services.PaypalService;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -16,14 +13,30 @@ public class Program {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
         Locale.setDefault(Locale.US);
+        Scanner sc = new Scanner(System.in);
 
-        Contract contract = new Contract(8028, new Date(), 600.0);
-        ContractService service = new ContractService();
-        service.processContract(contract, 3);
+        try {
+            System.out.println("Entre os dados do contrato:");
+            System.out.print("Número: ");
+            int number = sc.nextInt();
+            System.out.print("Data (dd/MM/yyyy): ");
+            Date date = sdf.parse(sc.next());
+            System.out.print("Valor do contrato: ");
+            double valor = sc.nextDouble();
+            System.out.print("Entre com o número de parcelas: ");
+            int installments = sc.nextInt();
 
-        System.out.println(contract);
+            Contract contract = new Contract(number, date, valor);
+            ContractService contractService = new ContractService();
+            contractService.processContract(contract, installments);
 
+            System.out.println("Parcelas:");
+            System.out.println(contract);
+        }
+        catch (ParseException e){
+            System.out.println(e.getMessage());
+        }
 
-
+        sc.close();
     }
 }

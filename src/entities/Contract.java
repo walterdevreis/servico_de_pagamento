@@ -59,7 +59,7 @@ public class Contract {
     public String toString(){
         StringBuilder sb = new StringBuilder();
         for (Installment list : installments) {
-            sb.append(System.out.printf("%s - %.2f%n", sdf.format(list.getDueDate()), list.getAmount()));
+            sb.append(list);
         }
         return sb.toString();
     }
